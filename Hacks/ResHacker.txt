@@ -1,0 +1,66 @@
+COMMAND LINE SYNTAX:
+
+	-open		filename, a Windows file (.exe, .dll) or a resource file (.res or .rc)
+	-save		filename, a new or modified file, a folder when extracting multiple resources
+	-resource	filename, contains a resource being added to the opened file
+	-add		add resource, fails if it already exists
+	-addoverwrite
+	-addskip
+	-compile	compile script file (*.rc) to a binary resource file (*.res)
+	-delete
+	-extract
+	-modify
+	-changelanguage(langID)			changes the language of ALL resources
+	-mask		resource mask		Type,Name,Language
+									commas are mandatory, but each string is optional
+	-log		filename|CON|NUL	if omitted, the log will be written to .log
+	-script		filename			contains a multi-command script, see -help script
+	-help		options				command-line or script (always logged to CONSOLE)
+
+	Identifiers (except -script) may be abbreviated down to a single char (eg -res or -r)
+	Instructions do not have to be in any particular order.
+
+BATCH EXAMPLES:
+
+	RunScript.bat:
+	ResourceHacker.exe -script myscript.txt
+
+	ExtractAllIcons.bat:
+	ResourceHacker.exe -open source.exe -save savedicons.rc -action extract -mask ICONGROUP,, -log savedicons.log
+
+SCRIPT FILE:
+
+	//comments are preceded by double slashes
+	[FILENAMES]
+	Open=
+	Save=
+	Log=
+	//one or more of the following commands ...
+	[COMMANDS]
+	-add			Source,Mask
+	-addskip		Source,Mask
+	-addoverwrite	Source,Mask
+	-addoverwrite	Source,Mask
+	-modify			Source,Mask
+	-extract		Target,Mask
+	-delete			Mask
+	-changelanguage(langID)
+
+SCRIPT EXAMPLES:
+
+	//Replaces resources in PROGRAM.exe with resources in PROGRAM.res
+	[FILENAMES]
+	Open=PROGRAM.exe
+	SaveAs=NEW_PROGRAM.exe
+	[COMMANDS]
+	-delete ,,, //delete all resources before ...
+	-addoverwrite PROGRAM.res ,,, //adding all the new resources
+
+	//Updates two bitmaps and an icon in PROGRAM.exe
+	[FILENAMES]
+	Open=PROGRAM.exe
+	SaveAs=NEW_PROGRAM.exe
+	[COMMANDS]
+	-addoverwrite Bitmap128.bmp, BITMAP,128,0
+	-addoverwrite Bitmap129.bmp, BITMAP,129,0
+	-addoverwrite MainIcon.ico, ICONGROUP,MAINICON,0
