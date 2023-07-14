@@ -1,6 +1,0 @@
-Windows Registry Editor Version 5.00
-
-[HKEY_CLASSES_ROOT\Software\Classes\ChromeHTML\DefaultIcon]
-@="C:\\WINDOWS\\System32\\imageres.dll,287"
-[HKEY_CLASSES_ROOT\Software\Classes\InternetShortcut\DefaultIcon]
-@="C:\\Windows\\System32\\imageres.dll,287"
