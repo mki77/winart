@@ -1,1 +1,1 @@
-``// Writing bores me so.``
+``// Sometimes it pays to stay in bed on Monday.``
