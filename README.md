@@ -1,1 +1,1 @@
-``// Sometimes it pays to stay in bed on Monday.``
+``// Not safe for work.``
